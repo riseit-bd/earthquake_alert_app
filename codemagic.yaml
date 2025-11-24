@@ -9,9 +9,18 @@ workflows:
     environment:
       flutter: stable
     scripts:
+      - name: Clean Flutter project
+        script: |
+          flutter clean
       - name: Get Flutter dependencies
         script: |
           flutter packages pub get
+      - name: Generate localization files
+        script: |
+          flutter gen-l10n
+      - name: List generated files
+        script: |
+          ls -R .dart_tool/
       - name: Analyze project
         script: |
           flutter analyze
