@@ -7,7 +7,7 @@ void main() {
       // Test case 1: Short distance
       expect(
         DistanceCalculator.calculateDistance(34.0522, -118.2437, 34.0523, -118.2438),
-        closeTo(0.012, 0.001),
+        closeTo(0.014, 0.001),
       );
 
       // Test case 2: Long distance
