@@ -21,7 +21,6 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_gen_runner:
 
 flutter:
   uses-material-design: true
