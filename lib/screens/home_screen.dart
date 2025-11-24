@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:earthquake_alert_app/l10n/app_localizations.dart';
 import 'package:earthquake_alert_app/services/notification_service.dart';
 import '../services/api_service.dart';
 import '../models/earthquake.dart';
