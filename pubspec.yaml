@@ -1,0 +1,28 @@
+name: earthquake_alert_app
+description: Multi-agency Earthquake Alert App for Bangladesh
+version: 1.0.0+1
+environment:
+  sdk: ">=3.0.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  http: ^1.1.0
+  google_maps_flutter: ^2.2.3
+  firebase_core: ^2.20.0
+  firebase_messaging: ^14.6.0
+  xml: ^6.5.0
+  intl: ^0.19.0
+  location: ^5.0.3
+  flutter_local_notifications: ^17.0.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_gen_runner:
+
+flutter:
+  uses-material-design: true
+  generate: true
