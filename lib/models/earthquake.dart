@@ -68,14 +68,14 @@ class Earthquake {
     );
   }
 
-  factory Earthquake.fromFCM(Map<String, String> data) {
+  factory Earthquake.fromFCM(Map<String, dynamic> data) {
     return Earthquake(
-      id: data['id'] ?? '',
-      agency: data['agency'] ?? '',
-      magnitude: double.tryParse(data['magnitude'] ?? '0.0') ?? 0.0,
-      latitude: double.tryParse(data['latitude'] ?? '0.0') ?? 0.0,
-      longitude: double.tryParse(data['longitude'] ?? '0.0') ?? 0.0,
-      time: DateTime.fromMillisecondsSinceEpoch(int.tryParse(data['time'] ?? '0') ?? 0),
+      id: data['id']?.toString() ?? '',
+      agency: data['agency']?.toString() ?? '',
+      magnitude: double.tryParse(data['magnitude']?.toString() ?? '0.0') ?? 0.0,
+      latitude: double.tryParse(data['latitude']?.toString() ?? '0.0') ?? 0.0,
+      longitude: double.tryParse(data['longitude']?.toString() ?? '0.0') ?? 0.0,
+      time: DateTime.fromMillisecondsSinceEpoch(int.tryParse(data['time']?.toString() ?? '0') ?? 0),
     );
   }
 }
