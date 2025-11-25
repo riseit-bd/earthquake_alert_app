@@ -9,26 +9,57 @@ workflows:
     environment:
       flutter: stable
     scripts:
+      - name: Validate secrets
+        script: |
+          set -ex
+          if [ -z "$KEYSTORE" ]; then echo "KEYSTORE secret variable is not set!"; exit 1; fi
+          if [ -z "$KEY_ALIAS" ]; then echo "KEY_ALIAS secret variable is not set!"; exit 1; fi
+          if [ -z "$KEYSTORE_PASSWORD" ]; then echo "KEYSTORE_PASSWORD secret variable is not set!"; exit 1; fi
+          if [ -z "$KEY_PASSWORD" ]; then echo "KEY_PASSWORD secret variable is not set!"; exit 1; fi
+      - name: Set up keystore
+        script: |
+          set -ex
+          echo $KEYSTORE | base64 --decode > /tmp/keystore.jks
+      - name: Set up key.properties
+        script: |
+          set -ex
+          echo "storeFile=/tmp/keystore.jks" > android/key.properties
+          echo "keyAlias=$KEY_ALIAS" >> android/key.properties
+          echo "storePassword=$KEYSTORE_PASSWORD" >> android/key.properties
+          echo "keyPassword=$KEY_PASSWORD" >> android/key.properties
+      - name: Debug key.properties
+        script: |
+          set -ex
+          echo "--- Reading android/key.properties ---"
+          cat android/key.properties
+          echo "------------------------------------"
       - name: Clean Flutter project
         script: |
+          set -ex
           flutter clean
       - name: Get Flutter dependencies
         script: |
+          set -ex
           flutter packages pub get
       - name: Generate localization files
         script: |
+          set -ex
           flutter gen-l10n
       - name: List generated files
         script: |
+          set -ex
           ls -R .dart_tool/
       - name: Analyze project
         script: |
+          set -ex
           flutter analyze
       - name: Run tests
         script: |
+          set -ex
           flutter test
       - name: Build Android App Bundle
         script: |
+          set -ex
           flutter build appbundle --release
     artifacts:
       - build/app/outputs/bundle/release/*.aab

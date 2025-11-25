@@ -6,7 +6,7 @@
              Flutter draws its first frame -->
         <item name="android:windowBackground">@drawable/launch_background</item>
     </style>
-    <!-- Theme applied to the Android Window as soon as الشاشة المنبثقة is dismissed. -->
+    <!-- Theme applied to the Android Window as soon as the splash screen is dismissed. -->
     <style name="NormalTheme" parent="@android:style/Theme.Light.NoTitleBar">
         <item name="android:windowBackground">?android:colorBackground</item>
     </style>
