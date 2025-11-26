@@ -9,6 +9,11 @@ workflows:
     environment:
       flutter: stable
     scripts:
+      - name: Debug Environment Variables
+        script: |
+          echo "--- Printing all environment variables ---"
+          printenv | sort
+          echo "----------------------------------------"
       - name: Validate secrets
         script: |
           set -ex
