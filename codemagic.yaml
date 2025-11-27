@@ -21,6 +21,7 @@ workflows:
           if [ -z "$KEY_ALIAS" ]; then echo "KEY_ALIAS secret variable is not set!"; exit 1; fi
           if [ -z "$KEYSTORE_PASSWORD" ]; then echo "KEYSTORE_PASSWORD secret variable is not set!"; exit 1; fi
           if [ -z "$KEY_PASSWORD" ]; then echo "KEY_PASSWORD secret variable is not set!"; exit 1; fi
+          if [ -z "$GOOGLE_SERVICES_JSON" ]; then echo "GOOGLE_SERVICES_JSON secret variable is not set!"; exit 1; fi
       - name: Set up keystore
         script: |
           set -ex
@@ -32,6 +33,10 @@ workflows:
           echo "keyAlias=$KEY_ALIAS" >> android/key.properties
           echo "storePassword=$KEYSTORE_PASSWORD" >> android/key.properties
           echo "keyPassword=$KEY_PASSWORD" >> android/key.properties
+      - name: Set up google-services.json
+        script: |
+          set -ex
+          echo $GOOGLE_SERVICES_JSON > android/app/google-services.json
       - name: Debug key.properties
         script: |
           set -ex

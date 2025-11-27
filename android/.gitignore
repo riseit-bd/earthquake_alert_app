@@ -11,3 +11,4 @@
 #
 # See https://flutter.dev/to/gitignore-platforms for more details.
 key.properties
+google-services.json
