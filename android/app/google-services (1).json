@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "750765410622",
+    "project_id": "earthquake-alert-56646",
+    "storage_bucket": "earthquake-alert-56646.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:750765410622:android:3a2c4bff7c093ec8ccc46f",
+        "android_client_info": {
+          "package_name": "com.rits.earthquake_alert_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDP3Br9XjFeq9ESlixK9mJqy1bVbQRkpHY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
