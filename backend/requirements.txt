@@ -1,4 +1,0 @@
-requests
-geopy
-xmltodict
-firebase-admin
