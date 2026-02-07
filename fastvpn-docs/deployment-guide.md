@@ -4,15 +4,29 @@ This document outlines the steps required to take the FastVPN Access project fro
 
 ## 1. Prerequisites
 
-- **Cloud Provider Accounts:** AWS (Primary), DigitalOcean, GCP (Secondary).
+- **Dedicated Server:** Ubuntu 22.04 LTS recommended.
+- **Database:** MySQL 8.0+.
+- **Runtime:** Node.js 20.x+.
+- **Process Manager:** PM2.
 - **Domain Name:** A registered domain for the API and reseller portals.
-- **SSL Certificates:** Managed via Let's Encrypt or AWS Certificate Manager.
-- **Terraform:** Installed locally or available in CI/CD.
-- **Docker & Kubernetes:** For microservices orchestration.
+- **SSL Certificates:** Managed via Let's Encrypt (Certbot).
 
 ## 2. Infrastructure Provisioning
 
-We use Terraform to manage the global server network.
+### Dedicated Server Setup
+Use the provided script to prepare your dedicated server:
+```bash
+./scripts/setup-dedicated-server.sh
+```
+
+### Database Initialization
+Initialize the MySQL schema:
+```bash
+mysql -u root -p < fastvpn-infrastructure/mysql/init.sql
+```
+
+### Global Network (Optional)
+For scaling, you can still use Terraform to manage additional VPN nodes:
 
 ```bash
 cd fastvpn-infrastructure
@@ -26,31 +40,48 @@ This will provision:
 - Load Balancers for the API Gateway.
 - Managed Database instances (PostgreSQL, Redis).
 
-## 3. Backend Deployment
+## 3. Backend Deployment (Node.js)
 
-The backend services are containerized and deployed to Kubernetes.
+The Node.js backend should be deployed using PM2 for high availability.
 
-1. **Build Docker images:**
+1. **Build the project:**
    ```bash
-   docker build -t fastvpn-api ./fastvpn-api
+   cd fastvpn-api/node-backend
+   npm install
+   npm run build
    ```
-2. **Push to registry:**
+2. **Start with PM2:**
    ```bash
-   docker push your-registry/fastvpn-api
-   ```
-3. **Deploy to K8s:**
-   ```bash
-   kubectl apply -f fastvpn-infrastructure/k8s/
+   pm2 start dist/main.js --name fastvpn-api
    ```
 
-## 4. Client Application Distribution
+## 4. Frontend Deployment (Next.js)
+
+Both Admin and Reseller portals run on Node.js.
+
+1. **Build and Start Admin:**
+   ```bash
+   cd fastvpn-admin
+   npm install
+   npm run build
+   pm2 start npm --name "fastvpn-admin" -- start
+   ```
+2. **Build and Start Reseller:**
+   ```bash
+   cd fastvpn-reseller
+   npm install
+   npm run build
+   pm2 start npm --name "fastvpn-reseller" -- start
+   ```
+
+## 5. Client Application Distribution
 
 - **Mobile (iOS/Android):** Submit to Apple App Store and Google Play Store.
 - **Desktop (Windows/macOS):** Signed installers distributed via CDN.
 - **Linux:** Packages distributed via DEB/RPM and Snap/Flatpak.
 - **Browser Extensions:** Submitted to Chrome Web Store and Firefox Add-ons.
 
-## 5. Live Verification
+## 6. Live Verification
 
 Once deployed, verify the live status:
 
@@ -58,7 +89,7 @@ Once deployed, verify the live status:
 - **Server Status:** `https://api.yourdomain.com/status`
 - **Admin Dashboard:** `https://admin.yourdomain.com`
 
-## 6. Continuous Integration & Deployment (CI/CD)
+## 7. Continuous Integration & Deployment (CI/CD)
 
 The project uses GitHub Actions for automated testing and deployment. Every push to the `main` branch triggers:
 1. Unit and Integration tests.
