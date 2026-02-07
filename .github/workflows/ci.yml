@@ -1,0 +1,25 @@
+name: FastVPN Access CI
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  core-build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Go
+      uses: actions/setup-go@v4
+      with:
+        go-version: '1.21'
+    - name: Build Core
+      run: cd fastvpn-core && go build ./...
+    - name: Test Core
+      run: cd fastvpn-core && go test ./...
+    - name: Build API
+      run: cd fastvpn-api && go build ./...
+    - name: Test API
+      run: cd fastvpn-api && go test ./...

@@ -1,30 +1,43 @@
-# Earthquake Alert App (Flutter)
+# FastVPN Access
 
-## Overview
-This is a Flutter-based Earthquake Alert App designed for Bangladesh.
-The app aggregates earthquake data from multiple sources (USGS, EMSC, IRIS/BMD if available) and provides P-wave alerts to users in near real-time.
+## "Access Fast, Stay Secure"
 
-**Features:**
-- Multi-agency earthquake feed integration
-- P-wave detection alerts
-- Map visualization of epicenters
-- Safety tips section
-- Push notifications via Firebase Cloud Messaging (FCM)
-- User-friendly interface (Bangla + English)
+FastVPN Access is a next-generation VPN platform designed for speed, security, and scalability. It provides a complete VPN ecosystem supporting all major platforms with enterprise-grade white-label capabilities for global reseller networks.
 
-## Firebase Setup
+## Project Structure
 
-To connect the Flutter app to your Firebase project and enable push notifications, you must add the platform-specific Firebase configuration files.
+```text
+fastvpn-access/
+├── fastvpn-core/              # VPN protocol implementations (WireGuard, FastWire)
+├── fastvpn-clients/           # All platform clients
+│   ├── windows/               # Windows Client (Electron + WFP)
+│   ├── macos/                 # macOS Client (Electron + Network Extension)
+│   ├── ios/                   # iOS App (React Native)
+│   ├── android/               # Android App (React Native)
+│   ├── linux/                 # Linux Client (Flutter)
+│   ├── browser-extensions/    # Chrome/Firefox/Edge/Safari extensions
+│   └── router-firmware/       # OpenWRT/AsusWRT/DD-WRT support
+├── fastvpn-admin/             # Admin control panel (Next.js)
+├── fastvpn-reseller/          # White-label portal (Next.js)
+├── fastvpn-api/               # Backend services (Go API Gateway + NestJS Microservices)
+├── fastvpn-billing/           # Subscription engine (Stripe/PayPal/Crypto)
+├── fastvpn-infrastructure/    # Terraform/K8s configs
+├── fastvpn-analytics/         # Monitoring & BI (Prometheus/Grafana)
+├── fastvpn-docs/              # Documentation
+└── fastvpn-tests/             # Test suites
+```
 
-### Android
+## Tech Stack
 
-1.  Go to your **Firebase project settings**.
-2.  In the **Your apps** card, select the Android app.
-3.  Download the `google-services.json` file.
-4.  Place this file in the `earthquake_alert_app/android/app/` directory.
+- **Frontend:** React Native (Mobile), Electron (Windows/macOS), Flutter (Linux), Next.js 14 (Web/Admin)
+- **Backend:** Go (API Gateway), Node.js/NestJS (Microservices)
+- **Database:** PostgreSQL + TimescaleDB, Redis, Elasticsearch
+- **Infrastructure:** Docker, Kubernetes, Terraform, Ansible
+- **Monitoring:** Prometheus, Grafana, Loki
 
-### iOS
+## Core Features
 
-1.  In the **Your apps** card of your Firebase project settings, select the iOS app.
-2.  Download the `GoogleService-Info.plist` file.
-3.  Open the `ios` directory in Xcode, then drag and drop the downloaded file into the `Runner` sub-directory.
+- **FastConnect™ Protocol Engine:** Proprietary optimizations including SpeedBoost, StreamAdapt, and GameMode.
+- **Protocol Support:** WireGuard®, FastWire™ (Custom), OpenVPN, IKEv2.
+- **White-Label System:** FastLaunch™ Reseller Portal with full branding control.
+- **Security:** AES-256-GCM, No-Logs Architecture, Advanced Kill Switch, DNS Firewall.
